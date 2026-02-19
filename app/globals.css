@@ -1,10 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Ovo&display=swap');
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Custom dark variant for Tailwind if needed */
+@custom-variant dark (&:where(.dark, .dark *));
 
+/* Theme inline variables */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -12,15 +13,53 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Smooth transitions on body */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Ovo', serif;
+
+  /* Tailwind utility classes applied */
+  @apply bg-black text-white transition-colors duration-300;
+}
+
+/* Light mode overrides */
+body:not(.dark) {
+  @apply bg-white text-black;
+}
+
+/* Slow pulse animation for glowing border */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+/* Glow border style for profile pic or similar */
+.glow-border {
+  box-shadow:
+    0 0 8px 4px rgba(156, 163, 175, 0.4), /* gray shadow */
+    0 0 20px 10px rgba(156, 163, 175, 0.3);
+  border-radius: 9999px; /* fully rounded */
+}
+
+/* Optional dark and light body backgrounds and text colors */
+body.dark {
+  background-color: #000;
+  color: #fff;
+}
+
+body.light {
+  background-color: #fff;
+  color: #000;
+}
+html {
+  scroll-behavior: smooth;
 }
