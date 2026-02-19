@@ -38,9 +38,17 @@ const About = () => {
   });
   const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
+  // Scroll to Contact Section
+  const scrollToContact = () => {
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section
-    id="about"
+      id="about"
       ref={ref}
       className="relative w-full py-24 px-6 md:px-20 bg-white dark:bg-black overflow-hidden"
     >
@@ -50,7 +58,8 @@ const About = () => {
           initial={{ opacity: 0, y: -40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl md:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-gray-700 via-gray-500 to-gray-500">
+          className="text-4xl md:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-gray-700 via-gray-500 to-gray-500"
+        >
           About <span className="text-black dark:text-gray-200">Me</span>
         </motion.h2>
       </div>
@@ -74,12 +83,12 @@ const About = () => {
               initial={{ opacity: 0, x: item.fromLeft ? -120 : 120 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              viewport={{ once: true, amount: 0.5 }} // animate when half visible
+              viewport={{ once: true, amount: 0.5 }}
               className={`relative md:w-1/2 ${
                 item.fromLeft ? "self-start pr-10" : "self-end pl-10"
               }`}
             >
-              {/* Number Dot on top */}
+              {/* Number Dot */}
               <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 w-10 h-10 rounded-full border-2 border-gray-300 bg-gray-800 flex items-center justify-center shadow-lg z-10">
                 <span className="text-gray-200 font-bold text-lg">{index + 1}</span>
               </div>
@@ -95,7 +104,10 @@ const About = () => {
 
                 {/* Last item button */}
                 {index === aboutItems.length - 1 && (
-                  <button className="px-8 py-3 rounded-full bg-gradient-to-r from-gray-600 to-gray-400 dark:from-gray-700 dark:to-gray-500 text-white font-semibold shadow-lg hover:scale-105 transition-all duration-300 relative overflow-hidden">
+                  <button
+                    onClick={scrollToContact}
+                    className="px-8 py-3 rounded-full bg-gradient-to-r from-gray-600 to-gray-400 dark:from-gray-700 dark:to-gray-500 text-white font-semibold shadow-lg hover:scale-105 transition-all duration-300 relative overflow-hidden"
+                  >
                     <span className="relative z-10">Contact Me</span>
                     <span className="absolute inset-0 bg-white/10 rounded-full blur-xl opacity-0 hover:opacity-30 transition-opacity duration-500"></span>
                   </button>

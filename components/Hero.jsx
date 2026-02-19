@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import { FiArrowUpRight } from "react-icons/fi";
 import { motion } from "framer-motion";
@@ -38,6 +39,14 @@ const Hero = () => {
     return () => clearTimeout(timer);
   }, [text, isDeleting, lineIndex]);
 
+  // Smooth scroll to projects section
+  const handleViewProjects = () => {
+    const projectsSection = document.getElementById("projects");
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section id="home" className="flex items-center justify-center mt-10 px-6 md:px-20 py-20 bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
       <div className="text-center max-w-3xl">
@@ -58,11 +67,14 @@ const Hero = () => {
         </motion.p>
 
         <motion.div className="flex justify-center gap-4 mt-6 flex-wrap" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.5 }} transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}>
-          <button className="bg-black dark:bg-gray-200 text-white dark:text-black px-5 py-2.5 rounded-full flex items-center gap-2 hover:opacity-90 transition">
+          {/* Download Resume */}
+          <a href="/sajawal-cv.pdf" download className="bg-black dark:bg-gray-200 text-white dark:text-black px-5 py-2.5 rounded-full flex items-center gap-2 hover:opacity-90 transition">
             Download Resume <FiArrowUpRight />
-          </button>
-          <button className="bg-gray-200 dark:bg-gray-500 text-black dark:text-white border border-gray-400 dark:border-gray-700 px-5 py-2.5 rounded-full hover:opacity-90 transition">
-            View Projects
+          </a>
+
+          {/* View Projects */}
+          <button onClick={handleViewProjects} className="bg-gray-200 dark:bg-gray-500 text-black dark:text-white border border-gray-400 dark:border-gray-700 px-5 py-2.5 rounded-full hover:opacity-90 transition flex items-center gap-2">
+            View Projects <FiArrowUpRight />
           </button>
         </motion.div>
       </div>
